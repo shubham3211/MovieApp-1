@@ -1,6 +1,5 @@
 const express = require('express');
 const mdb = require('moviedb')('785128e1bd19a03ab1bee95dd3dc52dd');
-const axios = require('axios');
 const path = require('path');
 const route = express.Router();
 

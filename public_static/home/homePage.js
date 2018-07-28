@@ -8,7 +8,6 @@ $(document).ready(function () {
 
   function insertMovies(data) {
     let movieData = data.results, movie = 0;
-    console.log(movieData);
     $('#movies').find('.homeDispL,.homeDispS').each(function () {
         let path = 'https://image.tmdb.org/t/p/w1280/' + movieData[movie].backdrop_path;
         let name = movieData[movie].original_title;

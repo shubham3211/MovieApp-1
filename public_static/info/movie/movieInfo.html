@@ -1,0 +1,94 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Logo</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 2</a>
+    </li>
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Dropdown link
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Link 1</a>
+        <a class="dropdown-item" href="#">Link 2</a>
+        <a class="dropdown-item" href="#">Link 3</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+<div class="movie">
+  <div class="smoke-screen"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 poster"></div>
+      <div class="col-sm-8 movieInfo">
+        <div class="row" style="margin-bottom: 20px">
+          <h2 class="title"></h2>
+          <span class="release-date"></span>
+        </div>
+        <div class="row"></div>
+        <div class="row information">
+          <h2 style="font-size: 1.3em;font-weight: 600; margin-bottom: 8px">Overview</h2>
+          <p></p>
+          <h3 style="margin-top: 30px;margin-bottom: 0;height: 40px;width: 100%">Featured Crew</h3>
+          <ol class="featured-crew"></ol>
+        </div>
+        <div class="row genres"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row cast-and-crew">
+      <h3>Cast And Crew</h3>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row entertainment-header">
+      <div class="col-sm-2 ">Media</div>
+      <div class="col-sm-2 recommendation">Recomendation</div>
+      <div class="col-sm-2 backdrop">Backdrops</div>
+      <div class="col-sm-2  posters">Posters</div>
+      <div class="col-sm-2 youtube-video">Video</div>
+    </div>
+  </div>
+  <div class="container entertainment">
+    <div  class="row">
+      <div class="col-sm-12 ">
+        <div class="backdrop-image"></div>
+        <div class="poster-image"></div>
+        <div class="video"></div>
+        <div class="recommend"></div>
+      </div>
+    </div>
+  </div>
+  <!--<div class="container">-->
+    <!--<div class="row recommend">-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+<script src="movieInfo.js"></script>
+</html>
