@@ -2,6 +2,8 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
   overflow: scroll;
+  position: relative;
+  top: 56px;
 }
 
 .movie {
@@ -10,6 +12,16 @@ body {
   background-size: cover;
   background-attachment: fixed;
 
+}
+
+.dropdown-item {
+  background-color: #343a40 !important;
+  color: #b7c7bd;
+}
+
+.dropdown-menu{
+  padding: 0;
+  border: 0;
 }
 
 .smoke-screen {
@@ -176,6 +188,7 @@ li p {
   font-weight: 600;
   div {
     //text-decoration-color: #00FC87;
+    text-align: center;
     &:hover {
       cursor: pointer;
       text-decoration: line-through;

@@ -27,5 +27,5 @@ route.get('/upcoming', (req, res) => {
   })
 });
 
-route.use('/', express.static(path.join(__dirname, '../public_static/tv')));
+route.use('/', express.static(path.join(__dirname, '../public_static')));
 exports.route = route;

@@ -11,14 +11,6 @@ const routes = {
   info: require('./routes/info').route,
 };
 
-// app.use(sassMiddleware({
-//   src: __dirname + '/public_static/css',
-//   dest: __dirname + '/public_static/css',
-//   debug: true,
-//   outputStyle: 'compressed',
-//   prefix:  '/prefix'
-// }));
-
 app.use('/', routes.home);
 
 app.use('/movie', routes.movie);

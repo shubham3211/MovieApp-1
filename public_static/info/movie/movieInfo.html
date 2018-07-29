@@ -10,28 +10,40 @@
   <link rel="stylesheet" href="../../css/main.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" style="padding-bottom: 0;padding-top: 0">
   <!-- Brand -->
-  <a class="navbar-brand" href="#">Logo</a>
+  <a class="navbar-brand" href="/"><img style="height: 46px;margin: 0;padding: 0" src="https://www.themoviedb.org/assets/1/v4/logos/408x161-powered-by-rectangle-green-bb4301c10ddc749b4e79463811a68afebeae66ef43d17bcfd8ff0e60ded7ce99.png" alt=""></a>
 
   <!-- Links -->
   <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link 1</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link 2</a>
-    </li>
+    <!--<li class="nav-item">-->
+      <!--<a class="nav-link" href="#">Link 1</a>-->
+    <!--</li>-->
+    <!--<li class="nav-item">-->
+      <!--<a class="nav-link" href="#">Link 2</a>-->
+    <!--</li>-->
 
     <!-- Dropdown -->
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Dropdown link
+        MOVIE
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
+        <a class="dropdown-item" href="/movie/movie.html?type=popular">Popular</a>
+        <a class="dropdown-item" href="/movie/movie.html?type=top_rated">Top Rated</a>
+        <a class="dropdown-item" href="/movie/movie.html?type=upcoming">Upcoming</a>
+        <a class="dropdown-item" href="/movie/movie.html?type=now_playing">Now Playing</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        TV
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/tv/tv.html?type=popular">Popular</a>
+        <a class="dropdown-item" href="/tv/tv.html?type=top_rated">Top Rated</a>
+          <a class="dropdown-item" href="/tv/tv.html?type=now_playing">On TV</a>
+          <a class="dropdown-item" href="/tv/tv.html?type=airing_today">Airing Today</a>
       </div>
     </li>
   </ul>
@@ -81,11 +93,6 @@
       </div>
     </div>
   </div>
-  <!--<div class="container">-->
-    <!--<div class="row recommend">-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

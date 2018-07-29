@@ -19,5 +19,5 @@ route.get('/tv' , (req, res) => {
 
 });
 
-route.use('/', express.static(path.join(__dirname, '../public_static/home')));
+route.use('/', express.static(path.join(__dirname, '../public_static')));
 exports.route = route;

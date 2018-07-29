@@ -1,51 +1,45 @@
-function getTheThing(type, id, cb) {
-  $.get(`/info/${type}?id=${id}`, (data) => {
-    cb(data);
-  })
+function getTheThing(type, id) {
+  return new Promise((resolve, reject) => {
+    $.get(`/info/${type}?id=${id}`, data => resolve(data));
+    })
 }
 
 $(document).ready(function () {
 
-  let movieInfo , id, urlParams ,images;
-
-  window.onload = function () {
-    urlParams = new URLSearchParams(window.location.search);
-    id = urlParams.get('id');
-    getTheThing('movie' ,id , insertMovie);
-  };
+  let movieInfo, id, urlParams, images;
+  urlParams = new URLSearchParams(window.location.search);
+  id = urlParams.get('id');
 
   function insertPoster() {
-    let path = 'https://image.tmdb.org/t/p/w1280/' + movieInfo.poster_path;
     $('.movie').css('background-image', `url(https://image.tmdb.org/t/p/w1280/${movieInfo.backdrop_path})`);
-    $('.poster').append(`<img src="${path}"  alt="">`)
+    $('.poster').append(`<img src="https://image.tmdb.org/t/p/w1280/${movieInfo.poster_path}"  alt="">`)
   }
 
   function insertData() {
     $('.title').text(`${movieInfo.original_title}`);
-    $('.release-date').text(`(${movieInfo.release_date.substr(0,4)})`);
+    $('.release-date').text(`(${movieInfo.release_date.substr(0, 4)})`);
     $('.information p').text(`${movieInfo.overview}`);
   }
 
   function insertCredits(data) {
     let ctr = 0;
-    while(ctr!=5){
-      console.log(data.crew[ctr].name);
+    while (ctr != 5) {
       $('.featured-crew').append(`<li><p style="font-weight: bold">${data.crew[ctr].name}</p><p style="font-size: .9em">${data.crew[ctr].job}</p></li>`);
       ctr++;
     }
 
-    let gernes = movieInfo.genres.length < 5 ? movieInfo.genres.length-1 : 5;
+    let gernes = movieInfo.genres.length < 5 ? movieInfo.genres.length - 1 : 5;
 
-    while(gernes){
+    while (gernes) {
       $('.genres').append(`<button type="button" class="btn btn-outline-success">${movieInfo.genres[gernes].name}</button>`);
       gernes--;
     }
 
     ctr = 0;
 
-    while(ctr != 8){
+    while (ctr != 8) {
       let profession = data.cast[ctr].gender == 2 ? 'Actor' : 'Actress';
-      let imgPath = 'https://image.tmdb.org/t/p/w1280/'+data.cast[ctr].profile_path;
+      let imgPath = 'https://image.tmdb.org/t/p/w1280/' + data.cast[ctr].profile_path;
       $('.cast-and-crew').append(`<div class="col-sm-3" style="position:relative"><img src="${imgPath}" alt="">
                                     <div class="cast-info"> 
                                       <div style="margin-bottom: 50px;margin-top: 10px">${profession}</div>
@@ -56,11 +50,9 @@ $(document).ready(function () {
                                   </div>`);
       ctr++;
     }
-    getTheThing('movie_image' , id, insertImages);
-    getTheThing('movie_video' , id, insertVideo);
   }
 
-  function insertPosterAndBackground (data, className) {
+  function insertPosterAndBackground(data, className) {
     data.forEach((element) => {
       $(className).append(`<div><img src="https://image.tmdb.org/t/p/w1280/${element.file_path}" alt=""></div>`)
     })
@@ -70,15 +62,12 @@ $(document).ready(function () {
     images = data;
     insertPosterAndBackground(data.backdrops, '.backdrop-image');
     insertPosterAndBackground(data.posters, '.poster-image');
-
   }
 
   function insertMovie(data) {
     movieInfo = data;
-    console.log(data);
     insertPoster();
     insertData();
-    getTheThing('movie_credits' , id, insertCredits);
   }
 
   function insertVideo(data) {
@@ -87,15 +76,14 @@ $(document).ready(function () {
       $('.video').append(`<iframe src="https://www.youtube.com/embed/${element.key}" frameborder="0"></iframe>`)
     });
     $('.video').hide();
-    getTheThing('movie_similar' , id, insertSimilar);
   }
 
   function hideAndDecorate(decorationClass, displayClass) {
     $(displayClass).siblings().hide();
     $(displayClass).show();
-    $(decorationClass).sibling().css('text-decoration', 'none');
-    $(decorationClass).css('text-decoration','line-through');
-    $(decorationClass).css('text-decoration-color','#00FC87');
+    $(decorationClass).siblings().css('text-decoration', 'none');
+    $(decorationClass).css('text-decoration', 'line-through');
+    $(decorationClass).css('text-decoration-color', '#00FC87');
   }
 
   function insertSimilar(data) {
@@ -122,5 +110,33 @@ $(document).ready(function () {
   $('.recommendation').click(function () {
     hideAndDecorate('.recommendation', '.recommend')
   });
+
+  Promise.all([
+    getTheThing('movie' ,id ),
+    getTheThing('movie_image' , id),
+    getTheThing('movie_video' , id),
+    getTheThing('movie_credits' , id),
+    getTheThing('movie_similar' , id)
+  ]).then((data) => {
+    insertMovie(data[0]);
+    insertImages(data[1]);
+    insertVideo(data[2]);
+    insertCredits(data[3]);
+    insertSimilar(data[4]);
+  }).catch((err) => console.log(err))
+
+  // getTheThing('movie', id).then(data=>{
+  //   insertMovie(data);
+  //   return getTheThing('movie_credits' , id)
+  // }).then(data => {
+  //   insertCredits(data);
+  //   return getTheThing('movie_video' , id)
+  // }).then(data => {
+  //   insertVideo(data);
+  //   return getTheThing('movie_image' , id)
+  // }).then(data => {
+  //   insertImages(data);
+  //   return getTheThing('movie_similar' , id)
+  // }) .then(data => insertSimilar(data));
 
 });
