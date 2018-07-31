@@ -47,7 +47,7 @@ h3 {
   padding-right: 15px;
 }
 
-.homeDispL:hover > img , .homeDispS:hover > img ,.col-sm-4:hover > img,.col-sm-3:hover > img,.col-sm-2:hover > img{
+.homeDispL:hover > a , .homeDispS:hover > a ,.col-sm-4:hover > a ,.col-sm-3:hover > a ,.col-sm-2:hover > a{
   filter: blur(2px);
   transition: filter .5s;
 }

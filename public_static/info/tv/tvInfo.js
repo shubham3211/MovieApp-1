@@ -1,7 +1,7 @@
 function getTheThing(type, id) {
   return new Promise((resolve, reject) => {
     $.get(`/info/${type}?id=${id}`, data => resolve(data));
-    })
+  })
 }
 
 $(document).ready(function () {
@@ -16,26 +16,28 @@ $(document).ready(function () {
   }
 
   function insertData() {
-    $('.title').text(`${movieInfo.original_title}`);
-    $('.release-date').text(`(${movieInfo.release_date.substr(0, 4)})`);
+    $('.title').text(`${movieInfo.original_name}`);
+    $('.release-date').text(`(${movieInfo.first_air_date.substr(0, 4)})`);
     $('.information p').text(`${movieInfo.overview}`);
   }
 
   function insertCredits(data) {
-    let ctr = data.crew.length < 5 ? data.crew.length-1 : 5;
-    while (ctr>=0) {
+    console.log(data);
+    let ctr = data.crew.length <= 5 ? data.crew.length-1 : 5;
+    console.log(data.crew.length);
+    while (ctr >= 0) {
       $('.featured-crew').append(`<li><p style="font-weight: bold">${data.crew[ctr].name}</p><p style="font-size: .9em">${data.crew[ctr].job}</p></li>`);
       ctr--;
     }
 
-    let gernes = movieInfo.genres.length < 5   ? movieInfo.genres.length-1  : 5;
+    let gernes = movieInfo.genres.length <= 5 ? movieInfo.genres.length - 1 : 5;
 
     while (gernes) {
       $('.genres').append(`<button type="button" class="btn btn-outline-success">${movieInfo.genres[gernes].name}</button>`);
       gernes--;
     }
 
-    ctr = data.cast.length < 7 ? data.cast.length-1 : 7;
+    ctr = data.cast.length <= 7 ? data.cast.length-1 : 7;
 
     while (ctr >= 0) {
       let profession = data.cast[ctr].gender == 2 ? 'Actor' : 'Actress';
@@ -44,7 +46,7 @@ $(document).ready(function () {
                                     <div class="cast-info"> 
                                       <div style="margin-bottom: 50px;margin-top: 10px">${profession}</div>
                                       <div style="margin-bottom: 50px">${data.cast[ctr].name}</div>
-                                      <div>${data.cast[ctr].character}</div>
+                                      <div>${data.cast[ctr].character.substring(0,47)}</div>
                                       <div></div>
                                     </div>
                                   </div>`);
@@ -65,6 +67,7 @@ $(document).ready(function () {
   }
 
   function insertMovie(data) {
+    console.log(data);
     movieInfo = data;
     insertPoster();
     insertData();
@@ -88,10 +91,10 @@ $(document).ready(function () {
 
   function insertSimilar(data) {
     let similar = data.results;
-    let destination = ``;
     similar.forEach(function (element) {
-      $('.recommend').append(`<div><a href=/info/movie/movieInfo.html?id=${element.id}><img src="https://image.tmdb.org/t/p/w500/${element.backdrop_path}" alt=""></a>
-                              <h3>${element.title} <span>${element.vote_average}<i class="far fa-star"></i></span></h3></div>`)
+      console.log(element)
+      $('.recommend').append(`<div><a href=/info/tv/tvInfo.html?id=${element.id}><img src="https://image.tmdb.org/t/p/w500/${element.backdrop_path}" alt=""></a>
+                              <h3>${element.name} <span>${element.vote_average}<i class="far fa-star"></i></span></h3></div>`)
     });
     hideAndDecorate('.recommendation', '.recommend');
   }
@@ -113,11 +116,11 @@ $(document).ready(function () {
   });
 
   Promise.all([
-    getTheThing('movie' ,id ),
-    getTheThing('movie_image' , id),
-    getTheThing('movie_video' , id),
-    getTheThing('movie_credits' , id),
-    getTheThing('movie_similar' , id)
+    getTheThing('tv' ,id ),
+    getTheThing('tv_image' , id),
+    getTheThing('tv_video' , id),
+    getTheThing('tv_credits' , id),
+    getTheThing('tv_similar' , id)
   ]).then((data) => {
     insertMovie(data[0]);
     insertImages(data[1]);

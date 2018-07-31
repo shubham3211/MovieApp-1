@@ -16,14 +16,13 @@ $(document).ready(function () {
   function insertTv(data) {
     let tvData = data.results, tv = 1;
     $('#tv').find('.row').each(function () {
-      $('img').remove();
-      while (tv%17!==0) {
-        $('.row').each(function () {
-          let path = 'https://image.tmdb.org/t/p/w1280/' + tvData[tv].poster_path;
-          $(this).append(`<div class="col-sm-3"><img src="${path}"  alt=""></div>`);
+        $('.col-sm-3').each(function () {
+          let path = 'https://image.tmdb.org/t/p/w500/' + tvData[tv].poster_path;
+          let destination = '/info/tv/tvInfo.html?id='+tvData[tv].id;
+          $(this).find('a').attr('href',`${destination}`);
+          $(this).find('img').attr('src',`${path}`);
           tv++;
         })
-      }
     })
   }
 });

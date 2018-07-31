@@ -15,14 +15,13 @@ $(document).ready(function () {
   function insertMovie(data) {
     let movieData = data.results, movie = 1;
     $('#movies').find('.row').each(function () {
-      $('img').remove();
-      while (movie%17!==0) {
-        $('.row').each(function () {
-          let path = 'https://image.tmdb.org/t/p/w1280/' + movieData[movie].poster_path;
-          $(this).append(`<div class="col-sm-3"><img src="${path}"  alt=""></div>`);
+        $('.col-sm-3').each(function () {
+          let path = 'https://image.tmdb.org/t/p/w500/' + movieData[movie].poster_path;
+          let destination = '/info/movie/movieInfo.html?id='+movieData[movie].id;
+          $(this).find('a').attr('href',`${destination}`);
+          $(this).find('img').attr('src',`${path}`);
           movie++;
         })
-      }
     })
   }
 });
