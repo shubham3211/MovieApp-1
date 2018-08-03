@@ -1,14 +1,14 @@
 const express = require('express');
-const path = require('path');
-// let sassMiddleware = require('node-sass-middleware');
-
 const app = express();
+
 
 const routes = {
   home: require('./routes/home').route,
   movie: require('./routes/movies').route,
   tv: require('./routes/tv').route,
   info: require('./routes/info').route,
+  google: require('./routes/login/oauth-google').route,
+  facebook: require('./routes/login/oauth-facebook').route,
 };
 
 app.use('/', routes.home);
