@@ -24,7 +24,7 @@ $(document).ready(function () {
   function insertData() {
     $('.title').text(`${movieInfo.original_name}`);
     $('.release-date').text(`(${movieInfo.first_air_date.substr(0, 4)})`);
-    $('.information p').text(`${movieInfo.overview}`);
+    $('.information .overview').text(`${movieInfo.overview}`);
   }
 
   function setLogin(loginInfo){
@@ -92,6 +92,59 @@ $(document).ready(function () {
     $('.video').hide();
   }
 
+  $('.rating').hover(function(e) {
+    $('.star').css('color','white');
+  })
+
+  let color = 0;
+
+  $('.watchlist').click(function(e) {
+    console.log(movieInfo);
+    if(login){
+      let colorType = color%2 == 0 ? 'black' : 'white';
+      $('.fa-bookmark').css('color', `${colorType}`);
+      console.log(movieInfo);
+      $.post('/updateUser/addMovie', {id: login._id, name: movieInfo.original_name});
+      color++;
+    }
+  })
+
+  $('.enterRating').hide();
+
+  $('.rating').click(function() {
+    $('.enterRating').toggle();
+  })
+
+  $('.star').hover(function(e) {
+    if(login){
+      $(this).prevUntil().css("color", "orange");
+      $(this).css("color", "orange");
+      $(this).nextUntil().css("color", "white");
+      rating = $(this).attr('data-rate');
+    }
+  }, function(e) {
+    if(login){
+      $.post('/updateUser', {rating: rating, id: login._id, movieId: movieInfo.id});
+    }
+  })
+
+  function setLogin(loginInfo){
+    console.log(loginInfo);
+    login = loginInfo;
+    if(login){
+      let ctr = 1;
+      loginInfo.watchList.forEach((element) => {
+        $('.watchlist .dropdown-menu').append(`<a class="dropdown-item" href="#">${element}</a>`);
+      })
+      loginInfo.movie.forEach((element) => {
+        if(element.movieId == movieInfo.id && ctr){
+          $('.your-rating').append(`<h4>Your Rating: ${element.rating}</h4>`);
+          ctr=0;
+        }
+      })
+    }
+  }
+
   function hideAndDecorate(decorationClass, displayClass) {
     $(displayClass).siblings().hide();
     $(displayClass).show();
@@ -103,7 +156,6 @@ $(document).ready(function () {
   function insertSimilar(data) {
     let similar = data.results;
     similar.forEach(function (element) {
-      console.log(element)
       $('.recommend').append(`<div><a href=/info/tv/tvInfo.html?id=${element.id}><img src="https://image.tmdb.org/t/p/w500/${element.backdrop_path}" alt=""></a>
                               <h3>${element.name} <span>${element.vote_average}<i class="far fa-star"></i></span></h3></div>`)
     });

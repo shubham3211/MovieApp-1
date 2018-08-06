@@ -153,3 +153,7 @@ li p {
 
 .checked {
   color: orange; }
+
+.bookmarked {
+  color: black;
+}

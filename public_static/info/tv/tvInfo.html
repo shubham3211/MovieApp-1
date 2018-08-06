@@ -48,6 +48,13 @@
           <a class="dropdown-item" href="/tv/tv.html?type=airing_today">Airing Today</a>
         </div>
       </li>
+      <li class="nav-item dropdown watchlist">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Watchlist
+        </a>
+        <div class="dropdown-menu">
+        </div>
+      </li>
     </ul>
   </nav>
   <div class="movie">
@@ -63,7 +70,26 @@
           <div class="row"></div>
           <div class="row information">
             <h2 style="font-size: 1.3em;font-weight: 600; margin-bottom: 8px">Overview</h2>
-            <p></p>
+            <p class="overview"></p>
+            <div class="your-rating"></div>
+            <div style="width:100%">
+            <span class="rating">
+              Rate This
+              <i class="far fa-star"></i>
+            </span>
+              <span class="enterRating">
+              <span class="star" data-rate='1'><i class="far fa-star"></i></span>
+              <span class="star" data-rate='2'><i class="far fa-star"></i></span>
+              <span class="star" data-rate='3'><i class="far fa-star"></i></span>
+              <span class="star" data-rate='4'><i class="far fa-star"></i></span>
+              <span class="star" data-rate='5'><i class="far fa-star"></i></span>
+            </span>
+            </div>
+            <div style="width: 100%;margin-top: 10px">
+              <p class="watchlist">
+                <i class="fa fa-bookmark fa-2x" aria-hidden="true"></i>
+              </p>
+            </div>
             <h3 style="margin-top: 30px;margin-bottom: 0;height: 40px;width: 100%">Featured Crew</h3>
             <ol class="featured-crew"></ol>
           </div>

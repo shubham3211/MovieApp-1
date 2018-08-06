@@ -68,6 +68,18 @@ $(document).ready(function () {
   function setLogin(loginInfo){
     console.log(loginInfo);
     login = loginInfo;
+    if(login){
+      let ctr = 1;
+      loginInfo.watchList.forEach((element) => {
+        $('.watchlist .dropdown-menu').append(`<a class="dropdown-item" href="#">${element}</a>`);
+      })
+      loginInfo.movie.forEach((element) => {
+        if(element.movieId == movieInfo.id && ctr){
+          $('.your-rating').append(`<h4>Your Rating: ${element.rating}</h4>`);
+          ctr=0;
+        }
+      })
+    }
   }
 
   function insertImages(data) {
@@ -110,6 +122,18 @@ $(document).ready(function () {
 
   $('.rating').hover(function(e) {
     $('.star').css('color','white');
+  })
+
+  let color = 0;
+
+  $('.watchlist').click(function(e) {
+    if(login){
+      let colorType = color%2 == 0 ? 'black' : 'white';
+      $('.fa-bookmark').css('color', `${colorType}`);
+      console.log(movieInfo);
+      $.post('/updateUser/addMovie', {id: login._id, name: movieInfo.original_title});
+      color++;
+    }
   })
 
   $('.star').hover(function(e) {
