@@ -5,6 +5,7 @@ const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const path = require('path');
+const bodyParser = require('body-parser')
 
 mongoose.connect(keys.mongodb.dbURI, () => {
   console.log('connected to mongodb');
@@ -25,8 +26,12 @@ const routes = {
   info: require('./routes/info').route,
   google: require('./routes/login/oauth-google').route,
   facebook: require('./routes/login/oauth-facebook').route,
-  profile: require('./routes/login/profile').route
+  profile: require('./routes/login/profile').route,
+  updateUser: require('./routes/login/upadteUser').route
 };
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.use('/', routes.home);
 
@@ -45,5 +50,7 @@ app.use('/movie', routes.movie);
 app.use('/tv', routes.tv);
 
 app.use('/info', routes.info);
+
+app.use('/updateUser', routes.updateUser)
 
 app.listen(3000, () => console.log('http://localhost:3000'));

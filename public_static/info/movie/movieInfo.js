@@ -66,8 +66,8 @@ $(document).ready(function () {
   }
 
   function setLogin(loginInfo){
-    login = loginInfo == 'verified' ? true : false;
-    console.log(login);
+    console.log(loginInfo);
+    login = loginInfo;
   }
 
   function insertImages(data) {
@@ -118,6 +118,10 @@ $(document).ready(function () {
       $(this).css("color", "orange");
       $(this).nextUntil().css("color", "white");
       rating = $(this).attr('data-rate');
+    }
+  }, function(e) {
+    if(login){
+      $.post('/updateUser', {rating: rating, id: login._id, movieId: movieInfo.id});
     }
   })
 

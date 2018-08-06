@@ -3,9 +3,9 @@ const route = express.Router();
 
 route.get('/', (req, res) => {
   if(!req.user){
-    res.send('not verified');
+    res.send(false);
   } else {
-    res.send('verified');
+    res.send(req.user);
   }
 });
 

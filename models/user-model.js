@@ -6,7 +6,8 @@ const userSchema = new Schema({
   googleId: String,
   thumbnail: String,
   facebookId: String,
-  movie: [{movieId: String, rating: Number}]
+  movie: [{movieId: String, rating: Number}],
+  watchList: [{name: String}]
 });
 
 const User = mongoose.model('user', userSchema);
