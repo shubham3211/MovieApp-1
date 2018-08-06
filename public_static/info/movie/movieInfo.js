@@ -4,11 +4,18 @@ function getTheThing(type, id) {
     })
 }
 
+function isLoggedin(){
+  return new Promise((resolve, reject) => {
+    $.get('/profile', data => resolve(data));
+  })
+}
+
 $(document).ready(function () {
 
-  let movieInfo, id, urlParams, images;
+  let movieInfo, id, urlParams, images, login = false,rating;
   urlParams = new URLSearchParams(window.location.search);
   id = urlParams.get('id');
+  $('.enterRating').hide();
 
   function insertPoster() {
     $('.movie').css('background-image', `url(https://image.tmdb.org/t/p/w500/${movieInfo.backdrop_path})`);
@@ -18,7 +25,7 @@ $(document).ready(function () {
   function insertData() {
     $('.title').text(`${movieInfo.original_title}`);
     $('.release-date').text(`(${movieInfo.release_date.substr(0, 4)})`);
-    $('.information p').text(`${movieInfo.overview}`);
+    $('.information .overview').text(`${movieInfo.overview}`);
   }
 
   function insertCredits(data) {
@@ -56,6 +63,11 @@ $(document).ready(function () {
     data.forEach((element) => {
       $(className).append(`<div><img src="https://image.tmdb.org/t/p/w500/${element.file_path}" alt=""></div>`)
     })
+  }
+
+  function setLogin(loginInfo){
+    login = loginInfo == 'verified' ? true : false;
+    console.log(login);
   }
 
   function insertImages(data) {
@@ -96,6 +108,23 @@ $(document).ready(function () {
     hideAndDecorate('.recommendation', '.recommend');
   }
 
+  $('.rating').hover(function(e) {
+    $('.star').css('color','white');
+  })
+
+  $('.star').hover(function(e) {
+    if(login){
+      $(this).prevUntil().css("color", "orange");
+      $(this).css("color", "orange");
+      $(this).nextUntil().css("color", "white");
+      rating = $(this).attr('data-rate');
+    }
+  })
+
+  $('.rating').click(function() {
+    $('.enterRating').toggle();
+  })
+
   $('.backdrop').click(function () {
     hideAndDecorate('.backdrop', '.backdrop-image');
   });
@@ -117,13 +146,15 @@ $(document).ready(function () {
     getTheThing('movie_image' , id),
     getTheThing('movie_video' , id),
     getTheThing('movie_credits' , id),
-    getTheThing('movie_similar' , id)
+    getTheThing('movie_similar' , id),
+    isLoggedin()
   ]).then((data) => {
     insertMovie(data[0]);
     insertImages(data[1]);
     insertVideo(data[2]);
     insertCredits(data[3]);
     insertSimilar(data[4]);
+    setLogin(data[5]);
   }).catch((err) => console.log(err))
 
   // getTheThing('movie', id).then(data=>{

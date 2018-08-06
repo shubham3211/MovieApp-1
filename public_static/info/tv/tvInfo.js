@@ -4,9 +4,15 @@ function getTheThing(type, id) {
   })
 }
 
+function isLoggedin(){
+  return new Promise((resolve, reject) => {
+    $.get('/profile', data => resolve(data));
+  })
+}
+
 $(document).ready(function () {
 
-  let movieInfo, id, urlParams, images;
+  let movieInfo, id, urlParams, images, login = false;
   urlParams = new URLSearchParams(window.location.search);
   id = urlParams.get('id');
 
@@ -19,6 +25,11 @@ $(document).ready(function () {
     $('.title').text(`${movieInfo.original_name}`);
     $('.release-date').text(`(${movieInfo.first_air_date.substr(0, 4)})`);
     $('.information p').text(`${movieInfo.overview}`);
+  }
+
+  function setLogin(loginInfo){
+    login = loginInfo == 'verified' ? true : false;
+    console.log(login);
   }
 
   function insertCredits(data) {
@@ -120,13 +131,15 @@ $(document).ready(function () {
     getTheThing('tv_image' , id),
     getTheThing('tv_video' , id),
     getTheThing('tv_credits' , id),
-    getTheThing('tv_similar' , id)
+    getTheThing('tv_similar' , id),
+    isLoggedin()
   ]).then((data) => {
     insertMovie(data[0]);
     insertImages(data[1]);
     insertVideo(data[2]);
     insertCredits(data[3]);
     insertSimilar(data[4]);
+    setLogin(data[5]);
   }).catch((err) => console.log(err))
 
   // getTheThing('movie', id).then(data=>{

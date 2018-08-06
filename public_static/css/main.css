@@ -63,13 +63,12 @@ body {
   text-align: left;
   padding: 0;
   flex-wrap: wrap; }
-
-.featured-crew li {
-  width: 50%;
-  text-align: left;
-  flex-basis: 33%;
-  padding-right: 20px;
-  margin-top: 20px; }
+  .featured-crew li {
+    width: 50%;
+    text-align: left;
+    flex-basis: 33%;
+    padding-right: 20px;
+    margin-top: 20px; }
 
 li p {
   margin: 0; }
@@ -102,18 +101,15 @@ li p {
   height: 240px;
   display: block;
   z-index: 1; }
-
-.cast-info div {
-  visibility: hidden; }
-
-.cast-info:hover {
-  border: 5px solid #00FC87;
-  border-radius: 5px;
-  opacity: .9;
-  background: #111111; }
-
-.cast-info:hover div {
-  visibility: visible; }
+  .cast-info div {
+    visibility: hidden; }
+  .cast-info:hover {
+    border: 5px solid #00FC87;
+    border-radius: 5px;
+    opacity: .9;
+    background: #111111; }
+    .cast-info:hover div {
+      visibility: visible; }
 
 .entertainment {
   height: 290px;
@@ -121,46 +117,39 @@ li p {
   overflow: hidden;
   overflow-x: auto;
   white-space: nowrap; }
-
-.entertainment div {
-  display: inline-block; }
-
-.entertainment .backdrop-image img {
-  width: 533px; }
-
-.entertainment .poster-image img {
-  width: 200px; }
-
-.entertainment .recommend {
-  color: white; }
-
-.entertainment .recommend img {
-  width: 420px;
-  height: 235px;
-  margin-right: 15px; }
-
-.entertainment .recommend span {
-  float: right;
-  padding-right: 20px; }
-
-.entertainment img {
-  height: 275px; }
-
-.entertainment .video iframe {
-  height: 275px;
-  width: 533px; }
+  .entertainment div {
+    display: inline-block; }
+  .entertainment .backdrop-image img {
+    width: 533px; }
+  .entertainment .poster-image img {
+    width: 200px; }
+  .entertainment .recommend {
+    color: white; }
+    .entertainment .recommend img {
+      width: 420px;
+      height: 235px;
+      margin-right: 15px; }
+    .entertainment .recommend span {
+      float: right;
+      padding-right: 20px; }
+  .entertainment img {
+    height: 275px; }
+  .entertainment .video iframe {
+    height: 275px;
+    width: 533px; }
 
 .entertainment-header {
   color: #b7c7bd;
   margin-bottom: 20px;
   font-size: 1.1em;
   font-weight: 600; }
+  .entertainment-header div {
+    text-align: center; }
+    .entertainment-header div:hover {
+      cursor: pointer;
+      text-decoration: line-through;
+      text-decoration-style: solid;
+      text-decoration-color: #00FC87; }
 
-.entertainment-header div {
-  text-align: center; }
-
-.entertainment-header div:hover {
-  cursor: pointer;
-  text-decoration: line-through;
-  text-decoration-style: solid;
-  text-decoration-color: #00FC87; }
+.checked {
+  color: orange; }
