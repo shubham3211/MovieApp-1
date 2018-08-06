@@ -26,7 +26,7 @@ passport.deserializeUser((id, done) => {
 
 passport.use(
   new GoogleStrategy({
-    callbackURL: '/google-oauth/google/redirect',
+    callbackURL: 'https://moviedb-tv-app.herokuapp.com/google-oauth/google/redirect',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret
   },(accessToken,refreshToken,profile,done) => {
