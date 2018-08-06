@@ -19,7 +19,6 @@ route.post('/', (req,res) => {
     result.save();
   })
 });
-
 route.post('/addMovie', (req,res) => {
   user.findById(req.body.id).then((result)  => {
     let found = false;
@@ -36,5 +35,5 @@ route.post('/addMovie', (req,res) => {
     console.log(result);
     result.save();
   })
-})
+});
 exports.route = route;
