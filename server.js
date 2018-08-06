@@ -53,4 +53,4 @@ app.use('/info', routes.info);
 
 app.use('/updateUser', routes.updateUser)
 
-app.listen(3000, () => console.log('http://localhost:3000'));
+app.listen(process.env.PORT || 3000, () => console.log('http://localhost:3000'));
