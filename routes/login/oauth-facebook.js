@@ -26,7 +26,7 @@ passport.deserializeUser((id, done) => {
 
 passport.use(
   new FacebookStrategy({
-    callbackURL: '/facebook-oauth/facebook/redirect',
+    callbackURL: 'https://moviedb-tv-app.herokuapp.com/facebook-oauth/facebook/redirect',
     clientID: keys.facebook.appID,
     clientSecret: keys.facebook.appSecret
   },(accessToken,refreshToken,profile,done) => {
