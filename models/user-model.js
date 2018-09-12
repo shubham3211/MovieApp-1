@@ -7,7 +7,8 @@ const userSchema = new Schema({
   thumbnail: String,
   facebookId: String,
   movie: [{movieId: String, rating: Number}],
-  watchList: [String]
+  watchList: [String],
+  accessToken: String
 });
 
 const User = mongoose.model('user', userSchema);

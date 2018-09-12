@@ -12,5 +12,9 @@ module.exports = {
   },
   session:{
     cookieKey: 'shubhamisAwesome'
+  },
+  github:{
+    clientID: 'ad0a7303d6f82e22d6b2',
+    clientSecret: '6e192387324c0cb99d55f3f255fd680e85d202ed'
   }
 };

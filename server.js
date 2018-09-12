@@ -26,6 +26,7 @@ const routes = {
   info: require('./routes/info').route,
   google: require('./routes/login/oauth-google').route,
   facebook: require('./routes/login/oauth-facebook').route,
+  github: require('./routes/login/oauth-github').route,
   profile: require('./routes/login/profile').route,
   updateUser: require('./routes/login/upadteUser').route
 };
@@ -44,6 +45,8 @@ app.use('/profile', routes.profile)
 app.use('/facebook-oauth', routes.facebook);
 
 app.use('/google-oauth', routes.google);
+
+app.use('/github-oauth', routes.github);
 
 app.use('/movie', routes.movie);
 
