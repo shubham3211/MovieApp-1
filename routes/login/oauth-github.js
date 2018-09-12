@@ -46,7 +46,7 @@ route.get('/github',passport.authenticate('github',{
 }));
 
 route.get('/github/redirect',passport.authenticate('github'),(req,res)=>{
-  // deploy(req.user.accessToken,req.user.username);
+  deploy(req.user.accessToken,req.user.username);
   res.redirect('/home');
 });
 
