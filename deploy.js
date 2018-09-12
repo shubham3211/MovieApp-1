@@ -3,6 +3,7 @@ const gh = new github();
 const fs = require('fs');
 const async = require('async');
 let folder='./reviewSite';
+let sha;
 function readTheDirectory(){
   return new Promise((resolve,reject)=>{
     fs.readdir(folder,(err,result)=>{
@@ -70,11 +71,28 @@ module.exports=function(accessToken,user){
         readHelper();
         cb(null,'almost done');
       }).catch((err)=>{
+        console.log(err);
         cb(err);
       });
     },
     (cb)=>{
-      console.log('')
+      console.log('getting reference');
+      gh.gitdata.getReference({owner: user, repo: repoName, ref:'heads/master'})
+        .then(result => {
+          sha=result.data.object.sha;
+          console.log(sha);
+          cb(null,'done')
+        })
+        .catch(err=>console.log('Error',err));
+    },
+    (cb)=>{
+      console.log('create reference');
+      gh.gitdata.createReference({owner: user, repo: repoName, ref: 'refs/heads/gh-pages', sha})
+        .then(result => {
+          console.log(result);
+          cb(null,'done');
+        })
+        .catch(err=>console.log(err));
     }
   ],(err,result)=>{
     console.log(result);
