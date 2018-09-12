@@ -54,13 +54,27 @@ module.exports=function(accessToken,user){
         //   })
         // });
         // }
+        let filecount=0;
         function readHelper(){
-
+          if(filecount===result.length){
+            return;
+          }
+          getTheContent(result[filecount]).then((content)=>{
+            gh.repos.createFile({owner: user, repo: repoName, path: result[filecount], message: 'commit by web app', content: content})
+              .then(()=>{
+                filecount++;
+                readHelper();
+              }).catch(err=>console.log(err));
+          })
         }
+        readHelper();
         cb(null,'almost done');
       }).catch((err)=>{
         cb(err);
       });
+    },
+    (cb)=>{
+      console.log('')
     }
   ],(err,result)=>{
     console.log(result);
