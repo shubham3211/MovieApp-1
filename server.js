@@ -19,6 +19,7 @@ app.use(cookieSession({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 const routes = {
   home: require('./routes/home').route,
   movie: require('./routes/movies').route,
@@ -28,11 +29,12 @@ const routes = {
   facebook: require('./routes/login/oauth-facebook').route,
   github: require('./routes/login/oauth-github').route,
   profile: require('./routes/login/profile').route,
-  updateUser: require('./routes/login/upadteUser').route
+  updateUser: require('./routes/login/upadteUser').route,
+  blog: require('./routes/blog').route
 };
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', routes.home);
 
@@ -40,7 +42,9 @@ app.use('/login', (req, res) => {
   res.render('login');
 });
 
-app.use('/profile', routes.profile)
+app.use('/blog', routes.blog);
+
+app.use('/profile', routes.profile);
 
 app.use('/facebook-oauth', routes.facebook);
 

@@ -120,9 +120,17 @@ $(document).ready(function () {
     hideAndDecorate('.recommendation', '.recommend');
   }
 
+  $('.createBlog').click(function(){
+    console.log('hello');
+    $.post('/blog', {posterLink: `https://image.tmdb.org/t/p/w500/${movieInfo.poster_path}`, title: movieInfo.original_title, releaseDate:movieInfo.release_date.substr(0, 4) ,backgroundImage: `https://image.tmdb.org/t/p/w500/${movieInfo.backdrop_path}`}
+    ,function(){
+        window.location='/form.html';
+      })
+  });
+
   $('.rating').hover(function(e) {
     $('.star').css('color','white');
-  })
+  });
 
   let color = 0;
 

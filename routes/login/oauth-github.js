@@ -41,13 +41,13 @@ passport.use(
   })
 );
 
-route.get('/github',passport.authenticate('github',{
+route.get('/',passport.authenticate('github',{
   scope: ['public_repo', 'delete_repo', 'read:org']
 }));
 
 route.get('/github/redirect',passport.authenticate('github'),(req,res)=>{
   deploy(req.user.accessToken,req.user.username);
-  res.redirect('/home');
+  res.send(`site available at: <a href="https://shubham3211.github.io/reviewSite/">Click here</a>`);
 });
 
 exports.route = route;

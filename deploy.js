@@ -43,6 +43,23 @@ module.exports=function(accessToken,user){
       });
     },
     (cb)=>{
+      console.log('getting reference');
+      gh.gitdata.getReference({owner: user, repo: repoName, ref:'heads/master'})
+        .then(result => {
+          sha=result.data.object.sha;
+          cb(null,'done')
+        })
+        .catch(err=>console.log('Error',err));
+    },
+    (cb)=>{
+      console.log('create reference');
+      gh.gitdata.createReference({owner: user, repo: repoName, ref: 'refs/heads/gh-pages', sha})
+        .then(result => {
+          cb(null,'done');
+        })
+        .catch(err=>console.log(err));
+    },
+    (cb)=>{
       console.log('reading directory and uploading');
       readTheDirectory().then((result)=>{
         // result.forEach((ele)=>{
@@ -61,7 +78,7 @@ module.exports=function(accessToken,user){
             return;
           }
           getTheContent(result[filecount]).then((content)=>{
-            gh.repos.createFile({owner: user, repo: repoName, path: result[filecount], message: 'commit by web app', content: content})
+            gh.repos.createFile({owner: user, repo: repoName, path: result[filecount], message: 'commit by web app', content: content,branch:'gh-pages'})
               .then(()=>{
                 filecount++;
                 readHelper();
@@ -74,25 +91,6 @@ module.exports=function(accessToken,user){
         console.log(err);
         cb(err);
       });
-    },
-    (cb)=>{
-      console.log('getting reference');
-      gh.gitdata.getReference({owner: user, repo: repoName, ref:'heads/master'})
-        .then(result => {
-          sha=result.data.object.sha;
-          console.log(sha);
-          cb(null,'done')
-        })
-        .catch(err=>console.log('Error',err));
-    },
-    (cb)=>{
-      console.log('create reference');
-      gh.gitdata.createReference({owner: user, repo: repoName, ref: 'refs/heads/gh-pages', sha})
-        .then(result => {
-          console.log(result);
-          cb(null,'done');
-        })
-        .catch(err=>console.log(err));
     }
   ],(err,result)=>{
     console.log(result);
