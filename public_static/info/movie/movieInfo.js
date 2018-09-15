@@ -193,18 +193,4 @@ $(document).ready(function () {
     setLogin(data[5]);
   }).catch((err) => console.log(err))
 
-  // getTheThing('movie', id).then(data=>{
-  //   insertMovie(data);
-  //   return getTheThing('movie_credits' , id)
-  // }).then(data => {
-  //   insertCredits(data);
-  //   return getTheThing('movie_video' , id)
-  // }).then(data => {
-  //   insertVideo(data);
-  //   return getTheThing('movie_image' , id)
-  // }).then(data => {
-  //   insertImages(data);
-  //   return getTheThing('movie_similar' , id)
-  // }) .then(data => insertSimilar(data));
-
 });

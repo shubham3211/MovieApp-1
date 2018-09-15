@@ -46,8 +46,10 @@ route.get('/',passport.authenticate('github',{
 }));
 
 route.get('/github/redirect',passport.authenticate('github'),(req,res)=>{
-  deploy(req.user.accessToken,req.user.username);
-  res.send(`site available at: <a href="https://shubham3211.github.io/reviewSite/">Click here</a>`);
+  deploy.deploy(req.user.accessToken,req.user.username);
+  setTimeout(()=>{
+    res.send(`site available at: <a href="https://shubham3211.github.io/reviewSite/">Click here</a>`);
+  },20000)
 });
 
 exports.route = route;

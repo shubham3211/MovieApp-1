@@ -23,7 +23,7 @@ function getTheContent(ele){
   })
 }
 
-module.exports=function(accessToken,user){
+function deploy(accessToken,user){
   gh.authenticate({type: 'oauth', token: accessToken});
   let repoName='reviewSite';
   async.series([
@@ -95,4 +95,8 @@ module.exports=function(accessToken,user){
   ],(err,result)=>{
     console.log(result);
   })
+};
+
+module.exports={
+  deploy:deploy
 };
