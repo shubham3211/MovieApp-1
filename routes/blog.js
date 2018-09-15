@@ -6,6 +6,7 @@ let body;
 
 route.post('/', (req,res,next)=>{
   body = Object.assign({},body,req.body);
+  console.log(body)
   res.send('done');
 });
 
