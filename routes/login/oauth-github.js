@@ -18,7 +18,7 @@ passport.deserializeUser((id, done) => {
 
 passport.use(
   new githubStrategy({
-    callback: 'http://localhost:3000/github/redirect',
+    callback: 'https://moviedb-tv-app.herokuapp.com/github-oauth/github/redirect',
     clientID: key.github.clientID,
     clientSecret: key.github.clientSecret
   },(accessToken,refreshToken,profile,done)=>{
