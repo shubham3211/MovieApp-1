@@ -12,7 +12,7 @@ route.post('/', (req,res,next)=>{
 });
 
 route.post('/form',(req,res,next)=>{
-  console.log(req.body)
+  console.log(req.body);
   body = Object.assign({},body,req.body);
   next();
 });
